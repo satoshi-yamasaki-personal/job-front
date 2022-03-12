@@ -1,7 +1,11 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/singup">Sing up</router-link> |
+    <router-link to="/singin">Sing in</router-link> |
+    <router-link to="/singout">Sing out</router-link> |
+    <router-link to="/mypage">Mypage</router-link> |
   </nav>
   <router-view/>
 </template>
