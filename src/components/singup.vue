@@ -20,8 +20,9 @@ import { server } from "../utils/helper"
 import axios from 'axios';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDPn61PCEnNr2W8VG34xV2AZdemGufMlH4",
-  authDomain: "fir-auth-sample-a1bac.firebaseapp.com"
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
 });
 
 export default {
@@ -31,9 +32,7 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(response => {
-          console.log("FIREBAE AUTHENTICATION RESPONSE....")
-          console.log(response);
-          console.log("FIREBASE AUTH END...");
+          console.log(process.env.VUE_APP_API_KEY);
           const data = {
             id: response.user.uid,
             name: response.user.email,
