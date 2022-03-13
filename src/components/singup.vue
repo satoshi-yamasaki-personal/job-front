@@ -17,10 +17,11 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { server } from "../utils/helper"
+import axios from 'axios';
 
 firebase.initializeApp({
-  apiKey: `${server.apiKey}`,
-  authDomain: `${server.authDomain}`
+  apiKey: "AIzaSyDPn61PCEnNr2W8VG34xV2AZdemGufMlH4",
+  authDomain: "fir-auth-sample-a1bac.firebaseapp.com"
 });
 
 export default {
@@ -30,27 +31,28 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(response => {
+          console.log("FIREBAE AUTHENTICATION RESPONSE....")
           console.log(response);
+          console.log("FIREBASE AUTH END...");
+          const data = {
+            id: response.user.uid,
+            name: response.user.email,
+            email: response.user.email
+          };
+          console.log(data);
+          this.__submitToServer(data);
           alert("Create Account");
         })
         .catch(error => {
           alert("Error!", error.message);
           console.error("Account Regeister Error", error.message);
         });
+    },
+    __submitToServer(data) {
+      axios.post(`${server.baseURL}/user`, data).then(response => {
+        console.log(response);
+      })
     }
   }
 }
-// import axios from "axios";
-// import { server } from "../utils/helper";
-// import router from "../router";
-// export default {
-//   methods: {
-//     getHello() {
-//       axios.get(`${server.baseURL}/hello`).then(response => {
-//         console.log(response);
-//         router.push({ name: "home" });
-//       });
-//     }
-//   }
-// }
 </script>
